@@ -6,14 +6,17 @@ const gameState = {
     fruits: [],
     particles: [],
     lastFrameTime: 0,
-    spawnInterval: 1500,
+    spawnInterval: 1500,  // Default spawn interval
     lastSpawnTime: 0,
     handLandmarks: null,
     fingerTip: { x: 0, y: 0, z: 0 },
     prevFingerTip: { x: 0, y: 0, z: 0 },
     bladeTrails: [],
     cameraWidth: 0,
-    cameraHeight: 0
+    cameraHeight: 0,
+    // Add default values for difficulty parameters
+    defaultSpawnInterval: 1500,
+    defaultLives: 5
 };
 
 // DOM elements
@@ -492,7 +495,7 @@ function gameLoop(timestamp) {
             gameState.lastSpawnTime = timestamp;
             
             // Gradually decrease spawn interval for increased difficulty
-            gameState.spawnInterval = Math.max(800, gameState.spawnInterval - 3);  // Slower difficulty increase
+            gameState.spawnInterval = Math.max(200, gameState.spawnInterval - 50);  //faster spawn interval as game progresses
         }
         
         updateObjects(deltaTime);
@@ -511,9 +514,9 @@ function gameLoop(timestamp) {
 function startGame() {
     // Reset game state
     gameState.score = 0;
-    gameState.lives = 5;  // Increased from 3 to 5
+    gameState.lives = gameState.defaultLives;  // Use default value
     gameState.lastSpawnTime = 0;
-    gameState.spawnInterval = 1500;  // Increased from 1000 to 1500 (slower spawning)
+    gameState.spawnInterval = gameState.defaultSpawnInterval;  // Use default value
     gameState.lastFrameTime = 0;
     
     // Clear any existing objects
@@ -573,6 +576,10 @@ async function init() {
     // Set canvas dimensions
     handCanvas.width = window.innerWidth * 0.5;
     handCanvas.height = window.innerHeight;
+    
+    // Store default game parameters
+    gameState.defaultSpawnInterval = 1500;  // Default spawn interval
+    gameState.defaultLives = 5;  // Default lives
     
     // Setup hand tracking
     await setupHandTracking();
