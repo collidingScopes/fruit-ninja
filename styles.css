@@ -1,0 +1,137 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+#game-canvas {
+    position: absolute;
+    top: 0;
+    left: 50vw;
+    width: 50vw !important;
+    height: 100vh !important;
+    z-index: 1;
+}
+#background {
+    position: absolute;
+    top: 0;
+    left: 50vw;
+    width: 50vw;
+    height: 100vh;
+    background-image: url('background2.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+#video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50vw;
+    height: 100vh;
+    z-index: 2;
+    transform: scaleX(-1);
+    object-fit: cover;
+}
+#hand-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50vw;
+    height: 100vh;
+    z-index: 3;
+    pointer-events: none;
+}
+#info-container {
+    background: rgba(255, 0, 140, 0.6);
+    position: absolute;
+    top: 10px;
+    left: 50vw;
+    padding: 10px;
+    margin: 0 auto;
+}
+#score-container {
+    z-index: 3;
+    color: white;
+    font-size: 24px;
+}
+#lives-container {
+    z-index: 3;
+    color: white;
+    font-size: 24px;
+}
+#start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 4;
+    color: white;
+}
+#start-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#game-over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 4;
+    color: white;
+}
+#restart-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 5;
+    color: white;
+}
+.blade-trail {
+    position: absolute;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.8));
+    height: 5px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 1;
+}

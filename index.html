@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Tracking Fruit Ninja</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="background"></div>
+        <canvas id="game-canvas"></canvas>
+        <video id="video" playsinline></video>
+        <canvas id="hand-canvas"></canvas>
+        <div id="info-container">
+            <div id="score-container">Score: <span id="score">0</span></div>
+            <div id="lives-container">Lives: <span id="lives">3</span></div>    
+        </div>
+
+        <div id="start-screen">
+            <h1>Hand Tracking Fruit Ninja</h1>
+            <p>Slice fruits with your hand movement!</p>
+            <p>Wave your hand in front of the camera to cut fruits.</p>
+            <p>Don't miss fruits or hit bombs!</p>
+            <button id="start-button">Start Game</button>
+        </div>
+        
+        <div id="game-over">
+            <h1>Game Over</h1>
+            <p>Your final score: <span id="final-score">0</span></p>
+            <button id="restart-button">Play Again</button>
+        </div>
+        
+        <div id="loading">
+            <h2>Loading...</h2>
+            <p>Initializing hand tracking and game assets</p>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+
+<script src="game.js"></script>
+</html>
