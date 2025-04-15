@@ -37,6 +37,20 @@ const loadingScreen = document.getElementById('loading');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas: gameCanvas, alpha: true, antialias: true });
+
+// Set pixel ratio based on device
+if (isMobileDevice()) {
+    // Use a lower pixel ratio for mobile devices (0.5 or 0.75 of the device pixel ratio)
+    const lowerRatio = Math.min(0.5, window.devicePixelRatio * 0.5);
+    renderer.setPixelRatio(lowerRatio);
+    console.log("Mobile device detected, using pixel ratio:", lowerRatio);
+} else {
+    // On desktop, we can use the full pixel ratio or cap it for consistency
+    const desktopRatio = Math.min(window.devicePixelRatio, 2); // Cap at 2 for performance
+    renderer.setPixelRatio(desktopRatio);
+    console.log("Desktop device detected, using pixel ratio:", desktopRatio);
+}
+
 renderer.setSize(window.innerWidth * 0.5, window.innerHeight);
 renderer.setClearColor(0x000000, 0.2);
 
@@ -50,6 +64,16 @@ scene.add(directionalLight);
 
 // Camera position
 camera.position.z = 20;
+
+function isMobileDevice() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    
+    // Regular expressions to check for iOS and Android
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+    const isAndroid = /android/i.test(userAgent);
+    
+    return isIOS || isAndroid;
+}
 
 // Fruit and bomb meshes
 const fruitGeometries = [
@@ -92,13 +116,23 @@ async function setupHandTracking() {
     });
     
     hands.onResults(onHandResults);
+
+    // Set default dimensions
+    let width = 640;
+    let height = 360;
+    
+    // Check if on mobile and reduce dimensions by 50% if true
+    if (isMobileDevice()) {
+        width = width * 0.5; // 320
+        height = height * 0.5; // 180
+    }
     
     const camera = new Camera(videoElement, {
         onFrame: async () => {
             await hands.send({image: videoElement});
         },
-        width: 1280,
-        height: 720
+        width: width,
+        height: height,
     });
     
     camera.start();
