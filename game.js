@@ -452,7 +452,7 @@ function checkCollisions() {
             // Check for sufficient hand movement speed for slicing
             const moveSpeed = calculateHandSpeed();
             const MIN_SLICE_SPEED = 0.04;  // Reduced from 0.1 to 0.05
-            const SLICE_DISTANCE = 6;
+            const SLICE_DISTANCE = 5;
 
             if (distance < SLICE_DISTANCE && moveSpeed > MIN_SLICE_SPEED) {  // Increased from 2.5 to 4.0
                 sliceFruit(fruit);
