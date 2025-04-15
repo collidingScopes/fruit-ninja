@@ -41,7 +41,7 @@ const loadingScreen = document.getElementById('loading');
 // Three.js setup
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ canvas: gameCanvas, alpha: true, antialias: true });
+const renderer = new THREE.WebGLRenderer({ canvas: gameCanvas, alpha: true, antialias: false });
 
 // Set pixel ratio based on device
 if (isMobileDevice()) {
