@@ -169,7 +169,7 @@ body {
     color: #ff0000; /* Red */
     text-shadow: 3px 3px 0 #ffff00, /* Yellow shadow */
                  6px 6px 0 #000;
-    animation: shake 0.5s infinite;
+    animation: shake 1s infinite;
 }
 
 #game-over p {

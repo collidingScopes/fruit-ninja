@@ -18,8 +18,8 @@ const gameState = {
     defaultSpawnInterval: 1500,
     defaultLives: 5,
     // Add spawn range parameters
-    desktopSpawnRange: 30,   // From -15 to +15
-    mobileSpawnRange: 20,     // From -10 to +10
+    desktopSpawnRange: 24,   // From -15 to +15
+    mobileSpawnRange: 14,     // From -10 to +10
     // Add frame counter for hand landmark drawing
     frameCount: 0,
 };
@@ -490,7 +490,7 @@ function sliceFruit(fruit) {
 // Create explosion effect for sliced fruit
 function createFruitExplosion(fruit) {
     const fruitColor = fruit.mesh.material.color.getHex();
-    const numParticles = 15; // Number of particles in explosion
+    const numParticles = 12; // Number of particles in explosion
     
     for (let i = 0; i < numParticles; i++) {
         // Create small particle geometry
@@ -641,13 +641,10 @@ async function init() {
     gameState.defaultSpawnInterval = 1500;  // Default spawn interval
     gameState.defaultLives = 5;  // Default lives
     
-    // Set spawn ranges based on device type
-    gameState.desktopSpawnRange = 30; // From -15 to +15
-    gameState.mobileSpawnRange = 20;  // From -10 to +10
-    
+
     // Further reduce spawn range for very small screens
     if (isMobileDevice() && window.innerWidth < 500) {
-        gameState.mobileSpawnRange = 16; // Even smaller range for tiny screens
+        gameState.mobileSpawnRange = 11; // Even smaller range for tiny screens
     }
     
     // Setup hand tracking
