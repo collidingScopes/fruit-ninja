@@ -11,6 +11,25 @@ body {
     height: 100vh;
 }
 
+#feedback-para{
+    z-index: 2000;
+    font-size: 15px;
+    color: white;
+    background-color:rgba(0, 66, 51, 0.5);
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    padding: 8px;
+}
+
+a {
+    color: pink;
+}
+
+a:visited {
+    color: pink;
+}
+
 #game-canvas {
     position: absolute;
     top: 0;
