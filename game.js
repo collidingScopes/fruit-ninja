@@ -249,10 +249,10 @@ function drawHandLandmarks(landmarks) {
         handCtx.fill();
         
         // Add number labels to each landmark
-        handCtx.fillStyle = 'white';
-        handCtx.font = '10px Arial';
-        handCtx.fillText(i.toString(), x + 7, y + 3);
-        handCtx.fillStyle = 'rgba(255, 0, 0, 0.8)';
+        // handCtx.fillStyle = 'white';
+        // handCtx.font = '10px Arial';
+        // handCtx.fillText(i.toString(), x + 7, y + 3);
+        // handCtx.fillStyle = 'rgba(255, 0, 0, 0.8)';
     }
     
     // Highlight index fingertip (landmark 8) in different color
@@ -452,7 +452,7 @@ function checkCollisions() {
             // Check for sufficient hand movement speed for slicing
             const moveSpeed = calculateHandSpeed();
             const MIN_SLICE_SPEED = 0.04;  // Reduced from 0.1 to 0.05
-            const SLICE_DISTANCE = 7;
+            const SLICE_DISTANCE = 6;
 
             if (distance < SLICE_DISTANCE && moveSpeed > MIN_SLICE_SPEED) {  // Increased from 2.5 to 4.0
                 sliceFruit(fruit);
