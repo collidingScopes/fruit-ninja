@@ -1,13 +1,16 @@
 body {
     margin: 0;
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', monospace; /* Retro monospace font */
+    background-color: #000;
 }
+
 #game-container {
     position: relative;
     width: 100vw;
     height: 100vh;
 }
+
 #game-canvas {
     position: absolute;
     top: 0;
@@ -16,6 +19,7 @@ body {
     height: 100vh !important;
     z-index: 1;
 }
+
 #background {
     position: absolute;
     top: 0;
@@ -27,6 +31,7 @@ body {
     background-position: center;
     z-index: 0;
 }
+
 #video {
     position: absolute;
     top: 0;
@@ -37,6 +42,7 @@ body {
     transform: scaleX(-1);
     object-fit: cover;
 }
+
 #hand-canvas {
     position: absolute;
     top: 0;
@@ -46,24 +52,33 @@ body {
     z-index: 3;
     pointer-events: none;
 }
+
 #info-container {
-    background: rgba(255, 0, 140, 0.6);
+    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid #39ff14; /* Neon green border */
     position: absolute;
     top: 10px;
     left: 50vw;
     padding: 10px;
     margin: 0 auto;
+    box-shadow: 0 0 10px #39ff14; /* Neon glow effect */
 }
+
 #score-container {
     z-index: 3;
-    color: white;
-    font-size: 24px;
+    color: #39ff14; /* Neon green text */
+    font-size: 18px;
+    text-shadow: 0 0 5px #39ff14; /* Text glow */
 }
+
 #lives-container {
     z-index: 3;
-    color: white;
-    font-size: 24px;
+    color: #39ff14; /* Neon green text */
+    font-size: 18px;
+    text-shadow: 0 0 5px #39ff14; /* Text glow */
 }
+
+/* Retro-styled start screen */
 #start-screen {
     position: absolute;
     top: 0;
@@ -74,20 +89,61 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.85);
     z-index: 4;
-    color: white;
+    color: #fff;
+    border: 8px solid #39ff14;
+    box-sizing: border-box;
 }
+
+#start-screen h1 {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: #ff00ff; /* Magenta */
+    text-shadow: 2px 2px 0 #00ffff, /* Cyan shadow */
+                 6px 6px 0 #000;
+    animation: pulse 1.5s infinite alternate;
+}
+
+#start-screen p {
+    font-size: 1.2rem;
+    margin: 5px 0;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 4px;
+    max-width: 80%;
+    text-align: center;
+}
+
 #start-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    margin-top: 30px;
+    padding: 12px 30px;
+    font-size: 1.5rem;
+    font-family: 'Courier New', monospace;
+    background-color: #39ff14; /* Neon green */
+    color: #000;
+    border: 3px solid #fff;
+    border-radius: 0; /* Square buttons for retro feel */
     cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px #39ff14; /* Glow effect */
 }
+
+#start-button:hover {
+    background-color: #fff;
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #fff;
+}
+
+/* Retro-styled game over screen */
 #game-over {
     position: absolute;
     top: 0;
@@ -98,20 +154,60 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.85);
     z-index: 4;
-    color: white;
+    color: #fff;
+    border: 8px solid #ff0000; /* Red border */
+    box-sizing: border-box;
 }
+
+#game-over h1 {
+    font-size: 4rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: #ff0000; /* Red */
+    text-shadow: 3px 3px 0 #ffff00, /* Yellow shadow */
+                 6px 6px 0 #000;
+    animation: shake 0.5s infinite;
+}
+
+#game-over p {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #fff;
+}
+
+#final-score {
+    color: #ffff00; /* Yellow */
+    font-size: 2rem;
+    text-shadow: 0 0 5px #ffff00; /* Yellow glow */
+}
+
 #restart-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    margin-top: 30px;
+    padding: 12px 30px;
+    font-size: 1.5rem;
+    font-family: 'Courier New', monospace;
+    background-color: #ff0000; /* Red */
+    color: #fff;
+    border: 3px solid #fff;
+    border-radius: 0; /* Square buttons for retro feel */
     cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px #ff0000; /* Glow effect */
 }
+
+#restart-button:hover {
+    background-color: #fff;
+    color: #ff0000;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #fff;
+}
+
 #loading {
     position: absolute;
     top: 0;
@@ -122,16 +218,95 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     z-index: 5;
-    color: white;
+    color: #39ff14; /* Neon green text */
+    text-shadow: 0 0 5px #39ff14; /* Text glow */
 }
+
+#loading h2 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: blink 1s infinite;
+}
+
 .blade-trail {
     position: absolute;
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.8));
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8));
     height: 5px;
     border-radius: 2px;
     pointer-events: none;
     z-index: 2;
     opacity: 1;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* Responsive styling */
+@media screen and (max-width: 768px) {
+    #start-screen h1, #game-over h1 {
+        font-size: 2.5rem;
+    }
+    
+    #start-screen p {
+        font-size: 1rem;
+        max-width: 90%;
+    }
+    
+    #start-button, #restart-button {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+    }
+    
+    #final-score {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #start-screen h1, #game-over h1 {
+        font-size: 2rem;
+    }
+    
+    #start-screen p {
+        font-size: 0.9rem;
+    }
+    
+    #start-button, #restart-button {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+    
+    #info-container {
+        padding: 5px;
+    }
+    
+    #score-container, #lives-container {
+        font-size: 14px;
+    }
 }
