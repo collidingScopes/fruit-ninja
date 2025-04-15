@@ -165,7 +165,7 @@ body {
     font-size: 4rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #ff0000; /* Red */
     text-shadow: 3px 3px 0 #ffff00, /* Yellow shadow */
                  6px 6px 0 #000;
@@ -185,7 +185,8 @@ body {
 }
 
 #restart-button {
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 12px 30px;
     font-size: 1.5rem;
     font-family: 'Courier New', monospace;
