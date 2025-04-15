@@ -16,7 +16,12 @@ const gameState = {
     cameraHeight: 0,
     // Add default values for difficulty parameters
     defaultSpawnInterval: 1500,
-    defaultLives: 5
+    defaultLives: 5,
+    // Add spawn range parameters
+    desktopSpawnRange: 30,   // From -15 to +15
+    mobileSpawnRange: 20,     // From -10 to +10
+    // Add frame counter for hand landmark drawing
+    frameCount: 0,
 };
 
 // DOM elements
@@ -140,16 +145,20 @@ async function setupHandTracking() {
 
 // Handle hand tracking results
 function onHandResults(results) {
-    // Clear the hand canvas
-    handCtx.clearRect(0, 0, handCanvas.width, handCanvas.height);
+    // Clear the hand canvas on every frame or when we're about to draw
+    if (gameState.frameCount % 2 === 0) {
+        handCtx.clearRect(0, 0, handCanvas.width, handCanvas.height);
+    }
     
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
         gameState.handLandmarks = results.multiHandLandmarks[0];
         
-        // Draw landmarks on the hand canvas
-        drawHandLandmarks(results.multiHandLandmarks[0]);
+        // Draw landmarks on the hand canvas only on every other frame
+        if (gameState.frameCount % 2 === 0) {
+            drawHandLandmarks(results.multiHandLandmarks[0]);
+        }
         
-        // Track index finger tip (landmark 8)
+        // Always track index finger tip for gameplay (landmark 8)
         gameState.prevFingerTip = { ...gameState.fingerTip };
         
         const indexTip = gameState.handLandmarks[8];
@@ -160,6 +169,7 @@ function onHandResults(results) {
         };
         
         // Create blade trail effect when significant movement is detected
+        // This should run every frame for smooth gameplay
         const moveThreshold = 0.02;
         const distance = Math.sqrt(
             Math.pow(gameState.fingerTip.x - gameState.prevFingerTip.x, 2) +
@@ -177,6 +187,9 @@ function onHandResults(results) {
     } else {
         gameState.handLandmarks = null;
     }
+    
+    // Increment frame counter
+    gameState.frameCount++;
 }
 
 // Draw hand landmarks
@@ -311,8 +324,16 @@ function spawnFruit() {
     const fruitIndex = Math.floor(Math.random() * fruitGeometries.length);
     const fruit = new THREE.Mesh(fruitGeometries[fruitIndex], fruitMaterials[fruitIndex]);
     
+    // Adjust spawn range based on device type
+    let xRange;
+    if (isMobileDevice()) {
+        xRange = gameState.mobileSpawnRange; // Smaller range for mobile
+    } else {
+        xRange = gameState.desktopSpawnRange; // Original range for desktop
+    }
+    
     // Position fruit at a random x position at the bottom of the screen
-    fruit.position.x = (Math.random() * 30) - 15;
+    fruit.position.x = (Math.random() * xRange) - (xRange / 2);
     fruit.position.y = -10;
     fruit.position.z = 0;
     
@@ -540,6 +561,10 @@ function gameLoop(timestamp) {
         // Render the scene
         renderer.render(scene, camera);
         
+        // Increment frame counter for the game loop as well
+        // This ensures we have a consistent frame count even if hand tracking is slower
+        gameState.frameCount++;
+        
         requestAnimationFrame(gameLoop);
     }
 }
@@ -552,6 +577,7 @@ function startGame() {
     gameState.lastSpawnTime = 0;
     gameState.spawnInterval = gameState.defaultSpawnInterval;  // Use default value
     gameState.lastFrameTime = 0;
+    gameState.frameCount = 0;  // Reset frame counter
     
     // Clear any existing objects
     gameState.fruits.forEach(fruit => scene.remove(fruit.mesh));
@@ -614,6 +640,15 @@ async function init() {
     // Store default game parameters
     gameState.defaultSpawnInterval = 1500;  // Default spawn interval
     gameState.defaultLives = 5;  // Default lives
+    
+    // Set spawn ranges based on device type
+    gameState.desktopSpawnRange = 30; // From -15 to +15
+    gameState.mobileSpawnRange = 20;  // From -10 to +10
+    
+    // Further reduce spawn range for very small screens
+    if (isMobileDevice() && window.innerWidth < 500) {
+        gameState.mobileSpawnRange = 16; // Even smaller range for tiny screens
+    }
     
     // Setup hand tracking
     await setupHandTracking();
